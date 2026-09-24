@@ -1,51 +1,1875 @@
-<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FF Tournament Hub</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FF Tournament Hub</title>
+
 <style>
-body{margin:0;background:#070a10;color:#f4f7fb;font-family:Arial,sans-serif}*{box-sizing:border-box}.container{max-width:1200px;margin:auto;padding:0 20px}
-nav{height:70px;border-bottom:1px solid #273141;background:#070a10;display:flex;align-items:center;position:sticky;top:0;z-index:5}.navin{width:100%;display:flex;justify-content:space-between;align-items:center}.logo{font-weight:900;font-size:20px}.logo span{color:#ff7a00}.navlinks{display:flex;gap:20px}.navlinks a{color:#c8d0db;text-decoration:none}.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:800;background:linear-gradient(135deg,#ff7a00,#ffb300);color:#111;cursor:pointer}.secondary{background:#171f2c;color:#fff;border:1px solid #273141}.danger{background:#35151b;color:#ff8994;border:1px solid #5b222c}.small{padding:7px 10px;font-size:12px}
-.hero{padding:55px 0 35px;display:grid;grid-template-columns:1.25fr .75fr;gap:24px}.badge,.tag{display:inline-block;padding:6px 9px;border-radius:8px;font-size:11px;font-weight:800;background:#2b1b09;color:#ffb04d}.badge{border-radius:999px}h1{font-size:clamp(40px,6vw,66px);line-height:1}h1 span{color:#ff7a00}p{color:#98a5b7;line-height:1.6}.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}.card{background:#111722;border:1px solid #273141;border-radius:17px;padding:20px}.hero-card{text-align:center}.flame{font-size:78px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#0a0f17;border:1px solid #273141;border-radius:10px;padding:12px}.stat b{font-size:20px;display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}section{padding:30px 0}.head{margin-bottom:16px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.muted{font-size:13px;color:#98a5b7}.match{border-left:3px solid #ff7a00}table{width:100%;border-collapse:collapse}th,td{padding:12px;text-align:left;border-bottom:1px solid #273141;font-size:13px}th{color:#98a5b7}.formbox{max-width:720px;margin:auto}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}label{display:block;font-size:12px;margin-bottom:6px}input,select{width:100%;padding:12px;border-radius:9px;border:1px solid #273141;background:#090e16;color:#fff}.full{grid-column:1/-1}.notice{padding:12px;border-radius:9px;margin-top:12px;background:#0b2418;color:#6df0ae;display:none}footer{border-top:1px solid #273141;padding:28px 0;margin-top:30px}#admin{display:none;background:#0a0f17;border-top:1px solid #273141;padding:30px 0}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.admin-stat{padding:17px;background:#111722;border:1px solid #273141;border-radius:13px}.admin-stat b{font-size:25px;display:block}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab{background:#171f2c;border:1px solid #273141;color:#fff;padding:9px 13px;border-radius:9px;cursor:pointer}.tab.active{background:#ff7a00;color:#111}.admin-section{display:none}.admin-section.active{display:block}.modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;place-items:center;padding:20px}.modal.show{display:grid}.modalbox{width:min(430px,100%);background:#111722;border:1px solid #273141;border-radius:18px;padding:25px}.error{color:#ff7b88;display:none;margin-top:8px}.ok{color:#6df0ae}.bad{color:#ff8994}@media(max-width:800px){.navlinks{display:none}.hero,.grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.admin-grid{grid-template-columns:1fr 1fr}table{display:block;overflow:auto;white-space:nowrap}}
-</style></head><body>
-<nav><div class="container navin"><div class="logo">🔥 <span>FF</span> TOURNAMENT HUB</div><div class="navlinks"><a href="#tournaments">Tournaments</a><a href="#matches">Matches</a><a href="#leaderboard">Leaderboard</a><a href="#register">Register</a></div><button class="btn" onclick="openLogin()">Admin Panel</button></div></nav>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#070a10;
+  color:#f4f7fb;
+  font-family:Arial,sans-serif
+}
+.container{max-width:1200px;margin:auto;padding:0 20px}
+
+nav{
+  height:70px;
+  border-bottom:1px solid #273141;
+  background:#070a10;
+  display:flex;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:5
+}
+.navin{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+.logo{font-weight:900;font-size:20px}
+.logo span{color:#ff7a00}
+.navlinks{display:flex;gap:20px}
+.navlinks a{color:#c8d0db;text-decoration:none}
+.navlinks a:hover{color:#ff7a00}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  font-weight:800;
+  background:linear-gradient(135deg,#ff7a00,#ffb300);
+  color:#111;
+  cursor:pointer
+}
+.secondary{
+  background:#171f2c;
+  color:#fff;
+  border:1px solid #273141
+}
+.danger{
+  background:#35151b;
+  color:#ff8994;
+  border:1px solid #5b222c
+}
+.small{padding:7px 10px;font-size:12px}
+
+.hero{
+  padding:55px 0 35px;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:24px
+}
+.badge,.tag{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:800;
+  background:#2b1b09;
+  color:#ffb04d
+}
+.badge{border-radius:999px}
+
+h1{
+  font-size:clamp(40px,6vw,66px);
+  line-height:1
+}
+h1 span{color:#ff7a00}
+
+p{
+  color:#98a5b7;
+  line-height:1.6
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+  flex-wrap:wrap
+}
+
+.card{
+  background:#111722;
+  border:1px solid #273141;
+  border-radius:17px;
+  padding:20px
+}
+.hero-card{text-align:center}
+.flame{font-size:78px}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px
+}
+.stat{
+  background:#0a0f17;
+  border:1px solid #273141;
+  border-radius:10px;
+  padding:12px
+}
+.stat b{
+  font-size:20px;
+  display:block
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px
+}
+section{padding:30px 0}
+
+.head{margin-bottom:16px}
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
+}
+.muted{
+  font-size:13px;
+  color:#98a5b7
+}
+.match{border-left:3px solid #ff7a00}
+
+table{
+  width:100%;
+  border-collapse:collapse
+}
+th,td{
+  padding:12px;
+  text-align:left;
+  border-bottom:1px solid #273141;
+  font-size:13px
+}
+th{color:#98a5b7}
+
+.formbox{
+  max-width:720px;
+  margin:auto
+}
+.formgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px
+}
+label{
+  display:block;
+  font-size:12px;
+  margin-bottom:6px
+}
+input,select{
+  width:100%;
+  padding:12px;
+  border-radius:9px;
+  border:1px solid #273141;
+  background:#090e16;
+  color:#fff
+}
+.full{grid-column:1/-1}
+
+.notice{
+  padding:12px;
+  border-radius:9px;
+  margin-top:12px;
+  background:#0b2418;
+  color:#6df0ae;
+  display:none
+}
+.notice.error{
+  background:#35151b;
+  color:#ff8994
+}
+
+footer{
+  border-top:1px solid #273141;
+  padding:28px 0;
+  margin-top:30px
+}
+
+#admin{
+  display:none;
+  background:#0a0f17;
+  border-top:1px solid #273141;
+  padding:30px 0
+}
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px
+}
+.admin-stat{
+  padding:17px;
+  background:#111722;
+  border:1px solid #273141;
+  border-radius:13px
+}
+.admin-stat b{
+  font-size:25px;
+  display:block
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:20px 0
+}
+.tab{
+  background:#171f2c;
+  border:1px solid #273141;
+  color:#fff;
+  padding:9px 13px;
+  border-radius:9px;
+  cursor:pointer
+}
+.tab.active{
+  background:#ff7a00;
+  color:#111
+}
+
+.admin-section{display:none}
+.admin-section.active{display:block}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000b;
+  z-index:20;
+  place-items:center;
+  padding:20px
+}
+.modal.show{display:grid}
+
+.modalbox{
+  width:min(430px,100%);
+  background:#111722;
+  border:1px solid #273141;
+  border-radius:18px;
+  padding:25px
+}
+
+.error{
+  color:#ff7b88;
+  display:none;
+  margin-top:8px
+}
+.ok{color:#6df0ae}
+.bad{color:#ff8994}
+
+@media(max-width:800px){
+  .navlinks{display:none}
+  .hero,.grid{grid-template-columns:1fr}
+  .formgrid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .admin-grid{grid-template-columns:1fr 1fr}
+  table{
+    display:block;
+    overflow:auto;
+    white-space:nowrap
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="container navin">
+
+<div class="logo">
+🔥 <span>FF</span> TOURNAMENT HUB
+</div>
+
+<div class="navlinks">
+<a href="#tournaments">Tournaments</a>
+<a href="#matches">Matches</a>
+<a href="#leaderboard">Leaderboard</a>
+<a href="#register">Register</a>
+</div>
+
+<button class="btn" onclick="openLogin()">Admin Panel</button>
+
+</div>
+</nav>
+
+
 <main class="container">
-<section class="hero"><div><span class="badge">FREE FIRE • ESPORTS</span><h1>Compete. <span>Dominate.</span> Win.</h1><p>Register your squad and manage tournaments, matches and leaderboard.</p><div class="actions"><a class="btn" href="#register">Join Tournament</a><a class="btn secondary" href="#leaderboard">Leaderboard</a></div></div><div class="card hero-card"><div class="flame">🔥</div><h2 id="heroTitle">BOOYAH CUP #01</h2><p>Registration is open</p><div class="stats"><div class="stat"><b id="heroTeams">0</b><small>Teams</small></div><div class="stat"><b id="heroPrize">৳5K</b><small>Prize</small></div><div class="stat"><b>4v4</b><small>Mode</small></div></div></div></section>
-<section id="tournaments"><h2>🔥 Tournaments</h2><div id="tournamentCards" class="grid"></div></section>
-<section id="matches"><h2>🎮 Match Schedule</h2><div id="matchCards" class="grid"></div></section>
-<section id="leaderboard"><h2>🏆 Leaderboard</h2><div class="card"><table><thead><tr><th>#</th><th>Team</th><th>Matches</th><th>Booyah</th><th>Points</th></tr></thead><tbody id="leaderBody"></tbody></table></div></section>
-<section id="register"><h2>📝 Player / Team Registration</h2><div class="card formbox"><form id="regForm"><div class="formgrid"><div><label>Team Name</label><input id="team" required></div><div><label>Player Name</label><input id="player" required></div><div><label>Player ID / UID</label><input id="uid" required></div><div><label>Phone / Contact</label><input id="phone" required></div><div class="full"><label>Tournament</label><select id="tournament" required></select></div><div class="full"><label>Discord Username (optional)</label><input id="discord"></div></div><button class="btn" style="width:100%;margin-top:18px">Submit Registration</button><div id="notice" class="notice"></div></form></div></section></main>
-<section id="admin"><div class="container"><div class="row"><div><h2>⚙️ Admin Dashboard</h2><p>Firebase shared admin data.</p></div><button class="btn danger" onclick="logout()">Logout</button></div>
-<div class="admin-grid"><div class="admin-stat"><b id="aPlayers">0</b><small>Registrations</small></div><div class="admin-stat"><b id="aTeams">0</b><small>Teams</small></div><div class="admin-stat"><b id="aTournaments">0</b><small>Tournaments</small></div><div class="admin-stat"><b id="aMatches">0</b><small>Matches</small></div></div>
-<div class="tabs"><button class="tab active" onclick="tab('registrations',this)">Registrations</button><button class="tab" onclick="tab('tournamentsAdmin',this)">Tournaments</button><button class="tab" onclick="tab('matchesAdmin',this)">Matches</button><button class="tab" onclick="tab('leaderAdmin',this)">Leaderboard</button></div>
-<div id="registrations" class="admin-section active"><div class="card"><div class="row"><h3>Registrations</h3><button class="btn danger small" onclick="clearRegistrations()">Clear All</button></div><div style="overflow:auto"><table><thead><tr><th>Team</th><th>Player</th><th>UID</th><th>Contact</th><th>Tournament</th><th>Discord</th><th></th></tr></thead><tbody id="regBody"></tbody></table></div></div></div>
-<div id="tournamentsAdmin" class="admin-section"><div class="card"><h3>Add Tournament</h3><div class="formgrid"><div><label>Name</label><input id="tn"></div><div><label>Prize</label><input id="tp"></div><div><label>Date / Time</label><input id="td"></div><div><label>Mode</label><input id="tm"></div></div><button class="btn" style="margin-top:14px" onclick="addTournament()">Add Tournament</button></div><div id="adminTournaments"></div></div>
-<div id="matchesAdmin" class="admin-section"><div class="card"><h3>Add Match</h3><div class="formgrid"><div><label>Match Name</label><input id="mn"></div><div><label>Date / Time</label><input id="md"></div><div><label>Room ID</label><input id="mr"></div><div><label>Room Password</label><input id="mp"></div></div><button class="btn" style="margin-top:14px" onclick="addMatch()">Add Match</button></div><div id="adminMatches"></div></div>
-<div id="leaderAdmin" class="admin-section"><div class="card"><h3>Add Leaderboard Team</h3><div class="formgrid"><div><label>Team</label><input id="ln"></div><div><label>Matches</label><input id="lm" type="number"></div><div><label>Booyah</label><input id="lb" type="number"></div><div><label>Points</label><input id="lp" type="number"></div></div><button class="btn" style="margin-top:14px" onclick="addLeader()">Save Team</button></div><div id="adminLeaders"></div></div></div></section>
-<footer><div class="container"><b>🔥 FF Tournament Hub</b><p>Shared data powered by Firebase Firestore.</p><div id="firebaseStatus">Connecting to Firebase...</div></div></footer>
-<div id="loginModal" class="modal"><div class="modalbox"><h2>🔐 Admin Login</h2><p>Use the admin email/password created in Firebase Authentication.</p><label>Email</label><input id="au" type="email" placeholder="admin@example.com"><label style="margin-top:12px">Password</label><input id="ap" type="password"><div id="loginError" class="error"></div><div class="actions"><button class="btn" onclick="login()">Login</button><button class="btn secondary" onclick="closeLogin()">Cancel</button></div></div></div>
+
+<section class="hero">
+
+<div>
+
+<span class="badge">FREE FIRE • ESPORTS</span>
+
+<h1>
+Compete. <span>Dominate.</span> Win.
+</h1>
+
+<p>
+Register your squad and manage tournaments, matches and leaderboard.
+</p>
+
+<div class="actions">
+<a class="btn" href="#register">Join Tournament</a>
+<a class="btn secondary" href="#leaderboard">Leaderboard</a>
+</div>
+
+</div>
+
+
+<div class="card hero-card">
+
+<div class="flame">🔥</div>
+
+<h2 id="heroTitle">BOOYAH CUP #01</h2>
+
+<p>Registration is open</p>
+
+<div class="stats">
+
+<div class="stat">
+<b id="heroTeams">0</b>
+<small>Teams</small>
+</div>
+
+<div class="stat">
+<b id="heroPrize">৳5K</b>
+<small>Prize</small>
+</div>
+
+<div class="stat">
+<b>4v4</b>
+<small>Mode</small>
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<section id="tournaments">
+
+<h2>🔥 Tournaments</h2>
+
+<div id="tournamentCards" class="grid"></div>
+
+</section>
+
+
+<section id="matches">
+
+<h2>🎮 Match Schedule</h2>
+
+<div id="matchCards" class="grid"></div>
+
+</section>
+
+
+<section id="leaderboard">
+
+<h2>🏆 Leaderboard</h2>
+
+<div class="card">
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>Team</th>
+<th>Matches</th>
+<th>Booyah</th>
+<th>Points</th>
+</tr>
+</thead>
+
+<tbody id="leaderBody"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section id="register">
+
+<h2>📝 Player / Team Registration</h2>
+
+<div class="card formbox">
+
+<form id="regForm">
+
+<div class="formgrid">
+
+<div>
+<label>Team Name</label>
+<input id="team" required>
+</div>
+
+<div>
+<label>Player Name</label>
+<input id="player" required>
+</div>
+
+<div>
+<label>Player ID / UID</label>
+<input id="uid" required>
+</div>
+
+<div>
+<label>Phone / Contact</label>
+<input id="phone" required>
+</div>
+
+<div class="full">
+<label>Tournament</label>
+<select id="tournament" required></select>
+</div>
+
+<div class="full">
+<label>Discord Username (optional)</label>
+<input id="discord">
+</div>
+
+</div>
+
+<button class="btn" style="width:100%;margin-top:18px">
+Submit Registration
+</button>
+
+<div id="notice" class="notice"></div>
+
+</form>
+
+</div>
+
+</section>
+
+</main>
+
+
+<section id="admin">
+
+<div class="container">
+
+<div class="row">
+
+<div>
+<h2>⚙️ Admin Dashboard</h2>
+<p>Firebase shared admin data.</p>
+</div>
+
+<button class="btn danger" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+
+<div class="admin-grid">
+
+<div class="admin-stat">
+<b id="aPlayers">0</b>
+<small>Registrations</small>
+</div>
+
+<div class="admin-stat">
+<b id="aTeams">0</b>
+<small>Teams</small>
+</div>
+
+<div class="admin-stat">
+<b id="aTournaments">0</b>
+<small>Tournaments</small>
+</div>
+
+<div class="admin-stat">
+<b id="aMatches">0</b>
+<small>Matches</small>
+</div>
+
+</div>
+
+
+<div class="tabs">
+
+<button class="tab active"
+onclick="tab('registrations',this)">
+Registrations
+</button>
+
+<button class="tab"
+onclick="tab('tournamentsAdmin',this)">
+Tournaments
+</button>
+
+<button class="tab"
+onclick="tab('matchesAdmin',this)">
+Matches
+</button>
+
+<button class="tab"
+onclick="tab('leaderAdmin',this)">
+Leaderboard
+</button>
+
+</div>
+
+
+<div id="registrations"
+class="admin-section active">
+
+<div class="card">
+
+<div class="row">
+
+<h3>Registrations</h3>
+
+<button
+class="btn danger small"
+onclick="clearRegistrations()">
+Clear All
+</button>
+
+</div>
+
+<div style="overflow:auto">
+
+<table>
+
+<thead>
+<tr>
+<th>Team</th>
+<th>Player</th>
+<th>UID</th>
+<th>Contact</th>
+<th>Tournament</th>
+<th>Discord</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody id="regBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="tournamentsAdmin"
+class="admin-section">
+
+<div class="card">
+
+<h3>Add Tournament</h3>
+
+<div class="formgrid">
+
+<div>
+<label>Name</label>
+<input id="tn">
+</div>
+
+<div>
+<label>Prize</label>
+<input id="tp">
+</div>
+
+<div>
+<label>Date / Time</label>
+<input id="td">
+</div>
+
+<div>
+<label>Mode</label>
+<input id="tm">
+</div>
+
+</div>
+
+<button
+class="btn"
+style="margin-top:14px"
+onclick="addTournament()">
+Add Tournament
+</button>
+
+</div>
+
+<div id="adminTournaments"></div>
+
+</div>
+
+
+<div id="matchesAdmin"
+class="admin-section">
+
+<div class="card">
+
+<h3>Add Match</h3>
+
+<div class="formgrid">
+
+<div>
+<label>Match Name</label>
+<input id="mn">
+</div>
+
+<div>
+<label>Date / Time</label>
+<input id="md">
+</div>
+
+<div>
+<label>Room ID</label>
+<input id="mr">
+</div>
+
+<div>
+<label>Room Password</label>
+<input id="mp">
+</div>
+
+</div>
+
+<button
+class="btn"
+style="margin-top:14px"
+onclick="addMatch()">
+Add Match
+</button>
+
+</div>
+
+<div id="adminMatches"></div>
+
+</div>
+
+
+<div id="leaderAdmin"
+class="admin-section">
+
+<div class="card">
+
+<h3>Add Leaderboard Team</h3>
+
+<div class="formgrid">
+
+<div>
+<label>Team</label>
+<input id="ln">
+</div>
+
+<div>
+<label>Matches</label>
+<input id="lm" type="number">
+</div>
+
+<div>
+<label>Booyah</label>
+<input id="lb" type="number">
+</div>
+
+<div>
+<label>Points</label>
+<input id="lp" type="number">
+</div>
+
+</div>
+
+<button
+class="btn"
+style="margin-top:14px"
+onclick="addLeader()">
+Save Team
+</button>
+
+</div>
+
+<div id="adminLeaders"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<div class="container">
+
+<b>🔥 FF Tournament Hub</b>
+
+<p>
+Shared data powered by Firebase Firestore.
+</p>
+
+<div id="firebaseStatus">
+Connecting to Firebase...
+</div>
+
+</div>
+
+</footer>
+
+
+<div id="loginModal" class="modal">
+
+<div class="modalbox">
+
+<h2>🔐 Admin Login</h2>
+
+<p>
+Use the admin email/password created in Firebase Authentication.
+</p>
+
+<label>Email</label>
+<input
+id="au"
+type="email"
+placeholder="admin@example.com"
+>
+
+<label style="margin-top:12px">
+Password
+</label>
+
+<input id="ap" type="password">
+
+<div id="loginError" class="error"></div>
+
+<div class="actions">
+
+<button class="btn" onclick="login()">
+Login
+</button>
+
+<button class="btn secondary" onclick="closeLogin()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import{getFirestore,collection,doc,getDocs,addDoc,deleteDoc,updateDoc,writeBatch}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-const firebaseConfig={apiKey:"AIzaSyCKwXuEDdXmu4anyq3ctRuyAsdj0b4psY",authDomain:"the-hunters-79.firebaseapp.com",projectId:"the-hunters-79",storageBucket:"the-hunters-79.firebasestorage.app",messagingSenderId:"594539478540",appId:"1:594539478540:web:402f078b0d6ccae6aa7829",measurementId:"G-G8JY88Q5QS"};
-const app=initializeApp(firebaseConfig),db=getFirestore(app),auth=getAuth(app),ADMIN_EMAIL="onikonik10005@gmail.com";
-const defaults={tournaments:[{name:"BOOYAH CUP #01",prize:"৳5,000",date:"28 Sep 2026 • 8:00 PM",mode:"Squad • 4 Players • Bermuda",open:true},{name:"TITAN CLASH",prize:"৳10,000",date:"05 Oct 2026 • 9:00 PM",mode:"Squad • 4 Players • Random Map",open:false},{name:"RUSH ARENA",prize:"৳2,000",date:"12 Oct 2026 • 8:30 PM",mode:"Duo • 2 Players • Clash Squad",open:false}],matches:[{name:"BOOYAH CUP #01 — Round 1",date:"28 Sep • 8:00 PM",room:"Will be announced",pass:"—"},{name:"BOOYAH CUP #01 — Round 2",date:"28 Sep • 9:00 PM",room:"Will be announced",pass:"—"},{name:"TITAN CLASH — Qualifier",date:"05 Oct • 9:00 PM",room:"Will be announced",pass:"—"}],leaders:[{name:"TITAN X",m:8,b:3,p:126},{name:"DRAGON 7",m:8,b:2,p:118},{name:"NOVA ESPORTS",m:8,b:2,p:109},{name:"RAGE SQUAD",m:8,b:1,p:97}]};
-let tournaments=[],matches=[],leaders=[],regs=[],adminUser=null;const $=id=>document.getElementById(id),safe=v=>String(v??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-async function read(n){const s=await getDocs(collection(db,n));return s.docs.map(d=>({id:d.id,...d.data()}))}
-async function seedIfEmpty(){for(const[n,data]of Object.entries(defaults)){const s=await getDocs(collection(db,n));if(s.empty){const b=writeBatch(db);data.forEach(x=>b.set(doc(collection(db,n)),x));await b.commit()}}}
-async function loadPublic(){try{const[a,b,c]=await Promise.all([read("tournaments"),read("matches"),read("leaders")]);tournaments=a.length?a:defaults.tournaments.map(x=>({...x}));matches=b.length?b:defaults.matches.map(x=>({...x}));leaders=c.length?c:defaults.leaders.map(x=>({...x}));render();$("firebaseStatus").innerHTML='<span class="ok">● Firebase connected • Public data loaded</span>'}catch(e){tournaments=defaults.tournaments;matches=defaults.matches;leaders=defaults.leaders;render();$("firebaseStatus").innerHTML='<span class="bad">● Firebase error: '+safe(e.message)+'</span>'}}
-async function loadAdmin(){if(!adminUser)return;try{await seedIfEmpty();[tournaments,matches,leaders,regs]=await Promise.all([read("tournaments"),read("matches"),read("leaders"),read("registrations")]);render()}catch(e){$("loginError").textContent="Admin data error: "+e.message;$("loginError").style.display="block"}}
+
+import {
+initializeApp
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+doc,
+getDocs,
+addDoc,
+deleteDoc,
+updateDoc,
+writeBatch
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCKwXuEDdXmu4anyq3ctRuyAsdj0b4psY",
+
+authDomain:"the-hunters-79.firebaseapp.com",
+
+projectId:"the-hunters-79",
+
+storageBucket:"the-hunters-79.firebasestorage.app",
+
+messagingSenderId:"594539478540",
+
+appId:"1:594539478540:web:402f078b0d6ccae6aa7829",
+
+measurementId:"G-G8JY88Q5QS"
+
+};
+
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+const auth=getAuth(app);
+
+const ADMIN_EMAIL="onikonik10005@gmail.com";
+
+
+const defaults={
+
+tournaments:[
+
+{
+name:"BOOYAH CUP #01",
+prize:"৳5,000",
+date:"28 Sep 2026 • 8:00 PM",
+mode:"Squad • 4 Players • Bermuda",
+open:true
+},
+
+{
+name:"TITAN CLASH",
+prize:"৳10,000",
+date:"05 Oct 2026 • 9:00 PM",
+mode:"Squad • 4 Players • Random Map",
+open:false
+},
+
+{
+name:"RUSH ARENA",
+prize:"৳2,000",
+date:"12 Oct 2026 • 8:30 PM",
+mode:"Duo • 2 Players • Clash Squad",
+open:false
+}
+
+],
+
+matches:[
+
+{
+name:"BOOYAH CUP #01 — Round 1",
+date:"28 Sep • 8:00 PM",
+room:"Will be announced",
+pass:"—"
+},
+
+{
+name:"BOOYAH CUP #01 — Round 2",
+date:"28 Sep • 9:00 PM",
+room:"Will be announced",
+pass:"—"
+},
+
+{
+name:"TITAN CLASH — Qualifier",
+date:"05 Oct • 9:00 PM",
+room:"Will be announced",
+pass:"—"
+}
+
+],
+
+leaders:[
+
+{
+name:"TITAN X",
+m:8,
+b:3,
+p:126
+},
+
+{
+name:"DRAGON 7",
+m:8,
+b:2,
+p:118
+},
+
+{
+name:"NOVA ESPORTS",
+m:8,
+b:2,
+p:109
+},
+
+{
+name:"RAGE SQUAD",
+m:8,
+b:1,
+p:97
+}
+
+]
+
+};
+
+
+let tournaments=[];
+let matches=[];
+let leaders=[];
+let regs=[];
+let adminUser=null;
+
+
+const $=id=>document.getElementById(id);
+
+
+const safe=v=>
+String(v??"").replace(
+/[&<>"']/g,
+c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[c])
+);
+
+
+async function read(name){
+
+const snap=
+await getDocs(
+collection(db,name)
+);
+
+return snap.docs.map(
+d=>({
+id:d.id,
+...d.data()
+})
+);
+
+}
+
+
+async function seedIfEmpty(){
+
+for(
+const [name,data]
+of Object.entries(defaults)
+){
+
+const snap=
+await getDocs(
+collection(db,name)
+);
+
+if(snap.empty){
+
+const batch=writeBatch(db);
+
+data.forEach(item=>{
+
+const ref=
+doc(
+collection(db,name)
+);
+
+batch.set(ref,item);
+
+});
+
+await batch.commit();
+
+}
+
+}
+
+}
+
+
+async function loadPublic(){
+
+try{
+
+const [
+t,
+m,
+l
+]=await Promise.all([
+
+read("tournaments"),
+read("matches"),
+read("leaders")
+
+]);
+
+
+tournaments=
+t.length
+?t
+:defaults.tournaments.map(x=>({...x}));
+
+
+matches=
+m.length
+?m
+:defaults.matches.map(x=>({...x}));
+
+
+leaders=
+l.length
+?l
+:defaults.leaders.map(x=>({...x}));
+
+
+render();
+
+
+$("firebaseStatus").innerHTML=
+'<span class="ok">● Firebase connected • Public data loaded</span>';
+
+
+}catch(error){
+
+tournaments=defaults.tournaments;
+matches=defaults.matches;
+leaders=defaults.leaders;
+
+render();
+
+$("firebaseStatus").innerHTML=
+'<span class="bad">● Firebase error: '+
+safe(error.message)+
+'</span>';
+
+}
+
+}
+
+
+async function loadAdmin(){
+
+if(!adminUser)return;
+
+try{
+
+await seedIfEmpty();
+
+[
+tournaments,
+matches,
+leaders,
+regs
+]=await Promise.all([
+
+read("tournaments"),
+read("matches"),
+read("leaders"),
+read("registrations")
+
+]);
+
+render();
+
+}catch(error){
+
+$("loginError").textContent=
+"Admin data error: "+
+error.message;
+
+$("loginError").style.display="block";
+
+}
+
+}
+
+
 function render(){
-$("tournamentCards").innerHTML=tournaments.map((t,i)=>`<div class="card"><div class="row"><span class="tag">${t.open?"REGISTRATION OPEN":"COMING SOON"}</span><b>${safe(t.prize)}</b></div><h3>${safe(t.name)}</h3><p class="muted">${safe(t.mode)}</p><p class="muted">${safe(t.date)}</p><button class="btn ${t.open?"":"secondary"}" style="width:100%;margin-top:13px" onclick="choose(${i})">${t.open?"Register Now":"Register"}</button></div>`).join("");
-$("matchCards").innerHTML=matches.map(m=>`<div class="card match"><span class="tag">UPCOMING</span><h3>${safe(m.name)}</h3><p class="muted">${safe(m.date)}</p><p>Room ID: <b>${safe(m.room)}</b><br>Room Password: <b>${safe(m.pass)}</b></p></div>`).join("");
-$("leaderBody").innerHTML=leaders.slice().sort((a,b)=>(b.p||0)-(a.p||0)).map((x,i)=>`<tr><td>${i+1}</td><td><b>${safe(x.name)}</b></td><td>${x.m||0}</td><td>${x.b||0}</td><td><b>${x.p||0}</b></td></tr>`).join("");$("tournament").innerHTML=tournaments.map(t=>`<option>${safe(t.name)}</option>`).join("");$("heroTitle").textContent=tournaments[0]?.name||"Tournament";$("heroTeams").textContent=new Set(regs.map(r=>r.team)).size;
-if(adminUser){$("aPlayers").textContent=regs.length;$("aTeams").textContent=new Set(regs.map(r=>r.team)).size;$("aTournaments").textContent=tournaments.length;$("aMatches").textContent=matches.length;$("regBody").innerHTML=regs.length?regs.map(r=>`<tr><td>${safe(r.team)}</td><td>${safe(r.player)}</td><td>${safe(r.uid)}</td><td>${safe(r.phone)}</td><td>${safe(r.tournament)}</td><td>${safe(r.discord||"—")}</td><td><button class="btn danger small" onclick="delReg('${r.id}')">Delete</button></td></tr>`).join(""):`<tr><td colspan="7">No registrations yet.</td></tr>`;$("adminTournaments").innerHTML=tournaments.map(t=>`<div class="card"><div class="row"><div><b>${safe(t.name)}</b><p>${safe(t.date)} • ${safe(t.mode)} • ${safe(t.prize)}</p></div><div><button class="btn small" onclick="toggleTournament('${t.id}')">${t.open?"Close":"Open"}</button> <button class="btn danger small" onclick="delTournament('${t.id}')">Delete</button></div></div></div>`).join("");$("adminMatches").innerHTML=matches.map(m=>`<div class="card"><div class="row"><div><b>${safe(m.name)}</b><p>${safe(m.date)} • Room: ${safe(m.room)} • Pass: ${safe(m.pass)}</p></div><button class="btn danger small" onclick="delMatch('${m.id}')">Delete</button></div></div>`).join("");$("adminLeaders").innerHTML=leaders.map(x=>`<div class="card"><div class="row"><div><b>${safe(x.name)}</b><p>Matches ${x.m||0} • Booyah ${x.b||0} • Points ${x.p||0}</p></div><button class="btn danger small" onclick="delLeader('${x.id}')">Delete</button></div></div>`).join("")}}
-window.choose=i=>{$("tournament").value=tournaments[i]?.name||"";$('register').scrollIntoView({behavior:'smooth'})};window.openLogin=()=>{$("loginError").style.display="none";$('loginModal').classList.add('show');$('au').focus()};window.closeLogin=()=>$('loginModal').classList.remove('show');
-window.login=async()=>{const email=$('au').value.trim(),pass=$('ap').value;$('loginError').style.display='none';if(email.toLowerCase()!==ADMIN_EMAIL){$('loginError').textContent='Use the configured admin email.';$('loginError').style.display='block';return}try{await signInWithEmailAndPassword(auth,email,pass);closeLogin()}catch(e){$('loginError').textContent='Login failed: '+e.message;$('loginError').style.display='block'}};
-window.logout=async()=>{await signOut(auth);$('admin').style.display='none';window.scrollTo({top:0,behavior:'smooth'})};window.tab=(id,el)=>{document.querySelectorAll('.admin-section').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active')};
-$('regForm').onsubmit=async e=>{e.preventDefault();$('regError').style.display='none';try{await addDoc(collection(db,'registrations'),{team:$('team').value.trim(),player:$('player').value.trim(),uid:$('uid').value.trim(),phone:$('phone').value.trim(),tournament:$('tournament').value,discord:$('discord').value.trim(),createdAt:new Date().toISOString()});e.target.reset();$('notice').textContent='Registration submitted successfully! 🎉';$('notice').style.display='block';if(adminUser)await loadAdmin();setTimeout(()=>$('notice').style.display='none',3000)}catch(e){$('regError').textContent='Registration failed: '+e.message;$('regError').style.display='block'}};
-window.delReg=async id=>{if(confirm('Delete this registration?')){await deleteDoc(doc(db,'registrations',id));await loadAdmin()}};window.clearRegistrations=async()=>{if(!confirm('Delete all registrations?'))return;const s=await getDocs(collection(db,'registrations')),b=writeBatch(db);s.docs.forEach(d=>b.delete(d.ref));await b.commit();await loadAdmin()};
-window.addTournament=async()=>{if(!$('tn').value.trim())return;await addDoc(collection(db,'tournaments'),{name:$('tn').value.trim(),prize:$('tp').value||'TBA',date:$('td').value||'TBA',mode:$('tm').value||'Squad',open:true});['tn','tp','td','tm'].forEach(x=>$(x).value='');await loadAdmin()};window.toggleTournament=async id=>{const t=tournaments.find(x=>x.id===id);await updateDoc(doc(db,'tournaments',id),{open:!t.open});await loadAdmin()};window.delTournament=async id=>{if(confirm('Delete this tournament?')){await deleteDoc(doc(db,'tournaments',id));await loadAdmin()}};
-window.addMatch=async()=>{if(!$('mn').value.trim())return;await addDoc(collection(db,'matches'),{name:$('mn').value.trim(),date:$('md').value||'TBA',room:$('mr').value||'TBA',pass:$('mp').value||'TBA'});['mn','md','mr','mp'].forEach(x=>$(x).value='');await loadAdmin()};window.delMatch=async id=>{if(confirm('Delete this match?')){await deleteDoc(doc(db,'matches',id));await loadAdmin()}};
-window.addLeader=async()=>{if(!$('ln').value.trim())return;await addDoc(collection(db,'leaders'),{name:$('ln').value.trim(),m:+$('lm').value||0,b:+$('lb').value||0,p:+$('lp').value||0});['ln','lm','lb','lp'].forEach(x=>$(x).value='');await loadAdmin()};window.delLeader=async id=>{if(confirm('Delete this team?')){await deleteDoc(doc(db,'leaders',id));await loadAdmin()}};
-onAuthStateChanged(auth,async u=>{adminUser=u&&u.email===ADMIN_EMAIL?u:null;if(adminUser){$('admin').style.display='block';await loadAdmin()}else $('admin').style.display='none'});loadPublic();
+
+$("tournamentCards").innerHTML=
+
+tournaments.map((t,i)=>`
+
+<div class="card">
+
+<div class="row">
+
+<span class="tag">
+${t.open?"REGISTRATION OPEN":"COMING SOON"}
+</span>
+
+<b>${safe(t.prize)}</b>
+
+</div>
+
+<h3>${safe(t.name)}</h3>
+
+<p class="muted">
+${safe(t.mode)}
+</p>
+
+<p class="muted">
+${safe(t.date)}
+</p>
+
+<button
+class="btn ${t.open?"":"secondary"}"
+style="width:100%;margin-top:13px"
+onclick="choose(${i})">
+
+${t.open?"Register Now":"Register"}
+
+</button>
+
+</div>
+
+`).join("");
+
+
+$("matchCards").innerHTML=
+
+matches.map(m=>`
+
+<div class="card match">
+
+<span class="tag">
+UPCOMING
+</span>
+
+<h3>${safe(m.name)}</h3>
+
+<p class="muted">
+${safe(m.date)}
+</p>
+
+<p>
+Room ID:
+<b>${safe(m.room)}</b>
+<br>
+Room Password:
+<b>${safe(m.pass)}</b>
+</p>
+
+</div>
+
+`).join("");
+
+
+$("leaderBody").innerHTML=
+
+leaders
+.slice()
+.sort(
+(a,b)=>(b.p||0)-(a.p||0)
+)
+.map((x,i)=>`
+
+<tr>
+
+<td>${i+1}</td>
+
+<td>
+<b>${safe(x.name)}</b>
+</td>
+
+<td>${x.m||0}</td>
+
+<td>${x.b||0}</td>
+
+<td>
+<b>${x.p||0}</b>
+</td>
+
+</tr>
+
+`).join("");
+
+
+$("tournament").innerHTML=
+
+tournaments.map(t=>
+`<option value="${safe(t.name)}">
+${safe(t.name)}
+</option>`
+).join("");
+
+
+$("heroTitle").textContent=
+tournaments[0]?.name||
+"BOOYAH CUP";
+
+
+$("heroPrize").textContent=
+tournaments[0]?.prize||
+"৳0";
+
+
+$("heroTeams").textContent=
+new Set(
+regs.map(r=>r.team)
+).size;
+
+
+if(adminUser){
+
+$("aPlayers").textContent=
+regs.length;
+
+$("aTeams").textContent=
+new Set(
+regs.map(r=>r.team)
+).size;
+
+$("aTournaments").textContent=
+tournaments.length;
+
+$("aMatches").textContent=
+matches.length;
+
+
+$("regBody").innerHTML=
+
+regs.length
+
+?
+
+regs.map(r=>`
+
+<tr>
+
+<td>${safe(r.team)}</td>
+
+<td>${safe(r.player)}</td>
+
+<td>${safe(r.uid)}</td>
+
+<td>${safe(r.phone)}</td>
+
+<td>${safe(r.tournament)}</td>
+
+<td>${safe(r.discord||"—")}</td>
+
+<td>
+
+<button
+class="btn danger small"
+onclick="delReg('${r.id}')">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`).join("")
+
+:
+
+`<tr>
+<td colspan="7">
+No registrations yet.
+</td>
+</tr>`;
+
+
+$("adminTournaments").innerHTML=
+
+tournaments.map(t=>`
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>${safe(t.name)}</b>
+
+<p>
+${safe(t.date)}
+•
+${safe(t.mode)}
+•
+${safe(t.prize)}
+</p>
+
+</div>
+
+<div>
+
+<button
+class="btn small"
+onclick="toggleTournament('${t.id}')">
+
+${t.open?"Close":"Open"}
+
+</button>
+
+<button
+class="btn danger small"
+onclick="delTournament('${t.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+
+$("adminMatches").innerHTML=
+
+matches.map(m=>`
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>${safe(m.name)}</b>
+
+<p>
+${safe(m.date)}
+•
+Room: ${safe(m.room)}
+•
+Pass: ${safe(m.pass)}
+</p>
+
+</div>
+
+<button
+class="btn danger small"
+onclick="delMatch('${m.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+
+$("adminLeaders").innerHTML=
+
+leaders.map(x=>`
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>${safe(x.name)}</b>
+
+<p>
+Matches ${x.m||0}
+•
+Booyah ${x.b||0}
+•
+Points ${x.p||0}
+</p>
+
+</div>
+
+<button
+class="btn danger small"
+onclick="delLeader('${x.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+}
+
+
+window.choose=i=>{
+
+$("tournament").value=
+tournaments[i]?.name||"";
+
+$("register").scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+
+window.openLogin=()=>{
+
+$("loginError").style.display="none";
+
+$("loginModal")
+.classList.add("show");
+
+$("au").focus();
+
+};
+
+
+window.closeLogin=()=>
+$("loginModal")
+.classList.remove("show");
+
+
+window.login=async()=>{
+
+const email=
+$("au").value.trim();
+
+const password=
+$("ap").value;
+
+$("loginError").style.display="none";
+
+
+if(
+email.toLowerCase()!==
+ADMIN_EMAIL
+){
+
+$("loginError").textContent=
+"Use the configured admin email.";
+
+$("loginError").style.display="block";
+
+return;
+
+}
+
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+closeLogin();
+
+}catch(error){
+
+$("loginError").textContent=
+"Login failed: "+
+error.message;
+
+$("loginError").style.display="block";
+
+}
+
+};
+
+
+window.logout=async()=>{
+
+await signOut(auth);
+
+$("admin").style.display="none";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+
+window.tab=(id,element)=>{
+
+document
+.querySelectorAll(".admin-section")
+.forEach(x=>
+x.classList.remove("active")
+);
+
+$(id).classList.add("active");
+
+document
+.querySelectorAll(".tab")
+.forEach(x=>
+x.classList.remove("active")
+);
+
+element.classList.add("active");
+
+};
+
+
+$("regForm").onsubmit=
+async event=>{
+
+event.preventDefault();
+
+const notice=$("notice");
+
+notice.className="notice";
+
+notice.style.display="none";
+
+
+try{
+
+await addDoc(
+collection(db,"registrations"),
+{
+
+team:$("team").value.trim(),
+
+player:$("player").value.trim(),
+
+uid:$("uid").value.trim(),
+
+phone:$("phone").value.trim(),
+
+tournament:$("tournament").value,
+
+discord:$("discord").value.trim(),
+
+createdAt:new Date().toISOString()
+
+}
+);
+
+
+event.target.reset();
+
+
+notice.textContent=
+"Registration submitted successfully! 🎉";
+
+notice.className="notice";
+
+notice.style.display="block";
+
+
+if(adminUser){
+await loadAdmin();
+}
+
+
+setTimeout(
+()=>{
+notice.style.display="none";
+},
+3000
+);
+
+
+}catch(error){
+
+notice.textContent=
+"Registration failed: "+
+error.message;
+
+notice.className=
+"notice error";
+
+notice.style.display="block";
+
+}
+
+};
+
+
+window.delReg=
+async id=>{
+
+if(
+confirm(
+"Delete this registration?"
+)
+){
+
+await deleteDoc(
+doc(db,"registrations",id)
+);
+
+await loadAdmin();
+
+}
+
+};
+
+
+window.clearRegistrations=
+async()=>{
+
+if(
+!confirm(
+"Delete all registrations?"
+)
+)return;
+
+
+const snap=
+await getDocs(
+collection(db,"registrations")
+);
+
+const batch=
+writeBatch(db);
+
+snap.docs.forEach(
+d=>batch.delete(d.ref)
+);
+
+await batch.commit();
+
+await loadAdmin();
+
+};
+
+
+window.addTournament=
+async()=>{
+
+if(
+!$("tn").value.trim()
+)return;
+
+
+await addDoc(
+collection(db,"tournaments"),
+{
+
+name:$("tn").value.trim(),
+
+prize:$("tp").value||"TBA",
+
+date:$("td").value||"TBA",
+
+mode:$("tm").value||"Squad",
+
+open:true
+
+}
+);
+
+
+[
+"tn",
+"tp",
+"td",
+"tm"
+].forEach(
+id=>$(id).value=""
+);
+
+await loadAdmin();
+
+};
+
+
+window.toggleTournament=
+async id=>{
+
+const tournament=
+tournaments.find(
+x=>x.id===id
+);
+
+if(!tournament)return;
+
+await updateDoc(
+doc(db,"tournaments",id),
+{
+open:!tournament.open
+}
+);
+
+await loadAdmin();
+
+};
+
+
+window.delTournament=
+async id=>{
+
+if(
+confirm(
+"Delete this tournament?"
+)
+){
+
+await deleteDoc(
+doc(db,"tournaments",id)
+);
+
+await loadAdmin();
+
+}
+
+};
+
+
+window.addMatch=
+async()=>{
+
+if(
+!$("mn").value.trim()
+)return;
+
+
+await addDoc(
+collection(db,"matches"),
+{
+
+name:$("mn").value.trim(),
+
+date:$("md").value||"TBA",
+
+room:$("mr").value||"TBA",
+
+pass:$("mp").value||"TBA"
+
+}
+);
+
+
+[
+"mn",
+"md",
+"mr",
+"mp"
+].forEach(
+id=>$(id).value=""
+);
+
+await loadAdmin();
+
+};
+
+
+window.delMatch=
+async id=>{
+
+if(
+confirm(
+"Delete this match?"
+)
+){
+
+await deleteDoc(
+doc(db,"matches",id)
+);
+
+await loadAdmin();
+
+}
+
+};
+
+
+window.addLeader=
+async()=>{
+
+if(
+!$("ln").value.trim()
+)return;
+
+
+await addDoc(
+collection(db,"leaders"),
+{
+
+name:$("ln").value.trim(),
+
+m:+$("lm").value||0,
+
+b:+$("lb").value||0,
+
+p:+$("lp").value||0
+
+}
+);
+
+
+[
+"ln",
+"lm",
+"lb",
+"lp"
+].forEach(
+id=>$(id).value=""
+);
+
+await loadAdmin();
+
+};
+
+
+window.delLeader=
+async id=>{
+
+if(
+confirm(
+"Delete this team?"
+)
+){
+
+await deleteDoc(
+doc(db,"leaders",id)
+);
+
+await loadAdmin();
+
+}
+
+};
+
+
+onAuthStateChanged(
+auth,
+async user=>{
+
+adminUser=
+user &&
+user.email===ADMIN_EMAIL
+?user
+:null;
+
+
+if(adminUser){
+
+$("admin").style.display="block";
+
+await loadAdmin();
+
+}else{
+
+$("admin").style.display="none";
+
+}
+
+}
+);
+
+
+loadPublic();
+
 </script>
-</body></html>
+
+</body>
+</html>
