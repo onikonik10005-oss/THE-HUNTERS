@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FF Tournament Hub — Admin</title>
+<style>
+:root{--bg:#070a10;--panel:#111722;--panel2:#171f2c;--line:#273141;--text:#f4f7fb;--muted:#98a5b7;--orange:#ff7a00;--yellow:#ffb300;--green:#18d17b;--red:#ff5364}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at 80% 0,#301900,transparent 35%),var(--bg);color:var(--text)}button{font:inherit;cursor:pointer}.container{max-width:1200px;margin:auto;padding:0 20px}
+nav{height:70px;border-bottom:1px solid var(--line);background:#070a10eF;display:flex;align-items:center;position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}.navin{width:100%;display:flex;justify-content:space-between;align-items:center}.logo{font-weight:900;font-size:20px}.logo span{color:var(--orange)}.navlinks{display:flex;gap:20px;color:#c8d0db;font-size:14px}.navlinks a{color:inherit;text-decoration:none}
+.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--yellow));color:#111}.btn.secondary{background:var(--panel2);border:1px solid var(--line);color:white}.btn.danger{background:#35151b;color:#ff8994;border:1px solid #5b222c}.btn.small{padding:7px 10px;font-size:12px}
+.hero{padding:55px 0 35px;display:grid;grid-template-columns:1.25fr .75fr;gap:24px}.badge,.tag{display:inline-block;padding:6px 9px;border-radius:7px;font-size:11px;font-weight:800;background:#2b1b09;color:#ffb04d}.badge{border-radius:999px;margin-bottom:16px}h1{font-size:clamp(40px,6vw,66px);line-height:1;margin:0 0 16px}.hero h1 span{color:var(--orange)}p{color:var(--muted);line-height:1.6}.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:20px}.hero-card{text-align:center}.flame{font-size:78px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:16px}.stat{background:#0a0f17;border:1px solid var(--line);border-radius:10px;padding:12px}.stat b{font-size:20px;display:block}.stat small{color:var(--muted)}
+section{padding:30px 0}.head{display:flex;justify-content:space-between;align-items:end;margin-bottom:16px}.head h2{margin:0;font-size:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.muted{font-size:13px;color:var(--muted)}.match{border-left:3px solid var(--orange)}
+table{width:100%;border-collapse:collapse}th,td{padding:12px;text-align:left;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted)}
+.formbox{max-width:720px;margin:auto}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}label{display:block;font-size:12px;color:#cbd4df;margin-bottom:6px}input,select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid var(--line);background:#090e16;color:#fff;outline:none}textarea{min-height:90px;resize:vertical}.full{grid-column:1/-1}.notice{padding:12px;border-radius:9px;margin-top:12px;background:#0b2418;color:#6df0ae;display:none}
+footer{border-top:1px solid var(--line);padding:28px 0;margin-top:30px}
+#admin{display:none;background:#0a0f17;border-top:1px solid var(--line);padding:30px 0}.adminbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.admin-stat{padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:13px}.admin-stat b{font-size:25px;display:block}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.tab{background:var(--panel2);border:1px solid var(--line);color:#fff;padding:9px 13px;border-radius:9px}.tab.active{background:var(--orange);color:#111;border-color:var(--orange)}.admin-section{display:none}.admin-section.active{display:block}.actions-inline{display:flex;gap:6px;flex-wrap:wrap}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;place-items:center;padding:20px}.modal.show{display:grid}.modalbox{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:25px}.modalbox h2{margin-top:0}.error{color:#ff7b88;font-size:13px;display:none;margin-top:8px}
+@media(max-width:800px){.navlinks{display:none}.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.admin-grid{grid-template-columns:1fr 1fr}table{display:block;overflow:auto;white-space:nowrap}}
+</style>
+</head>
+<body>
+<nav><div class="container navin">
+<div class="logo">🔥 <span>FF</span> TOURNAMENT HUB</div>
+<div class="navlinks"><a href="#tournaments">Tournaments</a><a href="#matches">Matches</a><a href="#leaderboard">Leaderboard</a><a href="#register">Register</a></div>
+<button class="btn" onclick="openLogin()">Admin Panel</button>
+</div></nav>
+
+<main class="container">
+<section class="hero">
+<div><span class="badge">FREE FIRE • ESPORTS</span><h1>Compete. <span>Dominate.</span> Win.</h1><p>Register your squad, manage tournaments, publish match information and control registrations from the built-in admin dashboard.</p><div class="actions"><a class="btn" href="#register">Join Tournament</a><a class="btn secondary" href="#leaderboard">Leaderboard</a></div></div>
+<div class="card hero-card"><div class="flame">🔥</div><h2 id="heroTitle">BOOYAH CUP #01</h2><p>Registration is open</p><div class="stats"><div class="stat"><b id="heroTeams">0</b><small>Teams</small></div><div class="stat"><b>৳5K</b><small>Prize</small></div><div class="stat"><b>4v4</b><small>Mode</small></div></div></div>
+</section>
+
+<section id="tournaments"><div class="head"><div><h2>🔥 Tournaments</h2><p>Available tournaments are shown here.</p></div></div><div id="tournamentCards" class="grid"></div></section>
+<section id="matches"><div class="head"><div><h2>🎮 Match Schedule</h2><p>Room information can be published by admin.</p></div></div><div id="matchCards" class="grid"></div></section>
+<section id="leaderboard"><div class="head"><div><h2>🏆 Leaderboard</h2><p>Current season standings.</p></div></div><div class="card"><table><thead><tr><th>#</th><th>Team</th><th>Matches</th><th>Booyah</th><th>Points</th></tr></thead><tbody id="leaderBody"></tbody></table></div></section>
+
+<section id="register"><div class="head"><div><h2>📝 Player / Team Registration</h2><p>Submit your player information.</p></div></div>
+<div class="card formbox"><form id="regForm"><div class="formgrid">
+<div><label>Team Name</label><input id="team" required></div><div><label>Player Name</label><input id="player" required></div>
+<div><label>Player ID / UID</label><input id="uid" required></div><div><label>Phone / Contact</label><input id="phone" required></div>
+<div class="full"><label>Tournament</label><select id="tournament"></select></div><div class="full"><label>Discord Username (optional)</label><input id="discord"></div>
+</div><button class="btn" style="width:100%;margin-top:18px">Submit Registration</button><div id="notice" class="notice">Registration submitted successfully! 🎉</div></form></div></section>
+</main>
+
+<section id="admin">
+<div class="container">
+<div class="adminbar"><div><h2 style="margin:0">⚙️ Admin Dashboard</h2><p style="margin:5px 0">Manage your tournament hub.</p></div><button class="btn danger" onclick="logout()">Logout</button></div>
+<div class="admin-grid"><div class="admin-stat"><b id="aPlayers">0</b><small class="muted">Registrations</small></div><div class="admin-stat"><b id="aTeams">0</b><small class="muted">Teams</small></div><div class="admin-stat"><b id="aTournaments">0</b><small class="muted">Tournaments</small></div><div class="admin-stat"><b id="aMatches">0</b><small class="muted">Matches</small></div></div>
+<div class="tabs"><button class="tab active" onclick="tab('registrations',this)">Registrations</button><button class="tab" onclick="tab('tournamentsAdmin',this)">Tournaments</button><button class="tab" onclick="tab('matchesAdmin',this)">Matches</button><button class="tab" onclick="tab('leaderAdmin',this)">Leaderboard</button></div>
+
+<div id="registrations" class="admin-section active"><div class="card"><div class="row"><h3>Player Registrations</h3><button class="btn danger small" onclick="clearRegistrations()">Clear All</button></div><div style="overflow:auto"><table><thead><tr><th>Team</th><th>Player</th><th>UID</th><th>Contact</th><th>Tournament</th><th>Action</th></tr></thead><tbody id="regBody"></tbody></table></div></div></div>
+
+<div id="tournamentsAdmin" class="admin-section"><div class="card"><h3>Add Tournament</h3><div class="formgrid"><div><label>Name</label><input id="tn"></div><div><label>Prize</label><input id="tp" placeholder="৳5,000"></div><div><label>Date / Time</label><input id="td"></div><div><label>Mode</label><input id="tm" placeholder="Squad • 4 Players"></div></div><button class="btn" style="margin-top:14px" onclick="addTournament()">Add Tournament</button></div><div id="adminTournaments" style="margin-top:14px"></div></div>
+
+<div id="matchesAdmin" class="admin-section"><div class="card"><h3>Add Match</h3><div class="formgrid"><div><label>Match Name</label><input id="mn"></div><div><label>Date / Time</label><input id="md"></div><div><label>Room ID</label><input id="mr"></div><div><label>Room Password</label><input id="mp"></div></div><button class="btn" style="margin-top:14px" onclick="addMatch()">Add Match</button></div><div id="adminMatches" style="margin-top:14px"></div></div>
+
+<div id="leaderAdmin" class="admin-section"><div class="card"><h3>Add / Update Leaderboard Team</h3><div class="formgrid"><div><label>Team</label><input id="ln"></div><div><label>Matches</label><input id="lm" type="number"></div><div><label>Booyah</label><input id="lb" type="number"></div><div><label>Points</label><input id="lp" type="number"></div></div><button class="btn" style="margin-top:14px" onclick="addLeader()">Save Team</button></div><div id="adminLeaders" style="margin-top:14px"></div></div>
+</div></section>
+
+<footer><div class="container"><div class="row"><b>🔥 FF Tournament Hub</b><span>Admin-managed tournament website</span></div><p>Demo version: data is stored in this browser using localStorage. For real online multi-device admin control, connect Firebase/backend.</p></div></footer>
+
+<div id="loginModal" class="modal"><div class="modalbox"><h2>🔐 Admin Login</h2><p>Enter admin credentials.</p><label>Username</label><input id="au" value="SAMI"><label style="margin-top:12px">Password</label><input id="ap" type="password" value="THE-SAMI" placeholder="Enter password"><div id="loginError" class="error">Wrong username or password.</div><div class="actions"><button class="btn" onclick="login()">Login</button><button class="btn secondary" onclick="closeLogin()">Cancel</button></div><p class="muted" style="margin-top:15px">Admin login: <b>SAMI</b> / <b>THE-SAMI</b></p></div></div>
+
+<script>
+const defaults={
+tournaments:[
+{name:"BOOYAH CUP #01",prize:"৳5,000",date:"28 Sep 2026 • 8:00 PM",mode:"Squad • 4 Players • Bermuda",open:true},
+{name:"TITAN CLASH",prize:"৳10,000",date:"05 Oct 2026 • 9:00 PM",mode:"Squad • 4 Players • Random Map",open:false},
+{name:"RUSH ARENA",prize:"৳2,000",date:"12 Oct 2026 • 8:30 PM",mode:"Duo • 2 Players • Clash Squad",open:false}],
+matches:[
+{name:"BOOYAH CUP #01 — Round 1",date:"28 Sep • 8:00 PM",room:"Will be announced",pass:"—"},
+{name:"BOOYAH CUP #01 — Round 2",date:"28 Sep • 9:00 PM",room:"Will be announced",pass:"—"},
+{name:"TITAN CLASH — Qualifier",date:"05 Oct • 9:00 PM",room:"Will be announced",pass:"—"}],
+leaders:[
+{name:"TITAN X",m:8,b:3,p:126},{name:"DRAGON 7",m:8,b:2,p:118},{name:"NOVA ESPORTS",m:8,b:2,p:109},{name:"RAGE SQUAD",m:8,b:1,p:97}]
+};
+function get(k){return JSON.parse(localStorage.getItem("ff_"+k)||"null")||defaults[k].map(x=>({...x}))}
+function set(k,v){localStorage.setItem("ff_"+k,JSON.stringify(v))}
+let tournaments=get("tournaments"),matches=get("matches"),leaders=get("leaders"),regs=JSON.parse(localStorage.getItem("ff_regs")||"[]");
+
+function render(){
+tournaments=get("tournaments");matches=get("matches");leaders=get("leaders");regs=JSON.parse(localStorage.getItem("ff_regs")||"[]");
+document.getElementById("tournamentCards").innerHTML=tournaments.map((t,i)=>`<div class="card"><div class="row"><span class="tag">${t.open?"REGISTRATION OPEN":"COMING SOON"}</span><b>${t.prize}</b></div><h3>${t.name}</h3><p class="muted">${t.mode}</p><p class="muted">${t.date}</p><button class="btn ${t.open?"":"secondary"}" style="width:100%;margin-top:13px" onclick="choose(${i})">${t.open?"Register Now":"Register"}</button></div>`).join("");
+document.getElementById("matchCards").innerHTML=matches.map(m=>`<div class="card match"><span class="tag">UPCOMING</span><h3>${m.name}</h3><p class="muted">${m.date}</p><p style="margin-top:10px">Room ID: <b>${m.room}</b><br>Room Password: <b>${m.pass}</b></p></div>`).join("");
+document.getElementById("leaderBody").innerHTML=leaders.slice().sort((a,b)=>b.p-a.p).map((x,i)=>`<tr><td>${i+1}</td><td><b>${x.name}</b></td><td>${x.m}</td><td>${x.b}</td><td><b>${x.p}</b></td></tr>`).join("");
+document.getElementById("tournament").innerHTML=tournaments.map(t=>`<option>${t.name}</option>`).join("");
+document.getElementById("heroTitle").textContent=tournaments[0]?.name||"Tournament";document.getElementById("heroTeams").textContent=new Set(regs.map(r=>r.team)).size;
+document.getElementById("aPlayers").textContent=regs.length;document.getElementById("aTeams").textContent=new Set(regs.map(r=>r.team)).size;document.getElementById("aTournaments").textContent=tournaments.length;document.getElementById("aMatches").textContent=matches.length;
+document.getElementById("regBody").innerHTML=regs.length?regs.map((r,i)=>`<tr><td>${r.team}</td><td>${r.player}</td><td>${r.uid}</td><td>${r.phone}</td><td>${r.tournament}</td><td><button class="btn danger small" onclick="delReg(${i})">Delete</button></td></tr>`).join(""):`<tr><td colspan="6" class="muted">No registrations yet.</td></tr>`;
+document.getElementById("adminTournaments").innerHTML=tournaments.map((t,i)=>`<div class="card" style="margin-bottom:9px"><div class="row"><div><b>${t.name}</b><p class="muted">${t.date} • ${t.mode} • ${t.prize}</p></div><div class="actions-inline"><button class="btn small" onclick="toggleTournament(${i})">${t.open?"Close":"Open"}</button><button class="btn danger small" onclick="delTournament(${i})">Delete</button></div></div></div>`).join("");
+document.getElementById("adminMatches").innerHTML=matches.map((m,i)=>`<div class="card" style="margin-bottom:9px"><div class="row"><div><b>${m.name}</b><p class="muted">${m.date} • Room: ${m.room} • Pass: ${m.pass}</p></div><button class="btn danger small" onclick="delMatch(${i})">Delete</button></div></div>`).join("");
+document.getElementById("adminLeaders").innerHTML=leaders.map((x,i)=>`<div class="card" style="margin-bottom:9px"><div class="row"><div><b>${x.name}</b><p class="muted">Matches ${x.m} • Booyah ${x.b} • Points ${x.p}</p></div><button class="btn danger small" onclick="delLeader(${i})">Delete</button></div></div>`).join("");
+}
+function choose(i){document.getElementById("tournament").value=tournaments[i].name;document.getElementById("register").scrollIntoView({behavior:"smooth"})}
+document.getElementById("regForm").addEventListener("submit",e=>{e.preventDefault();regs.push({team:team.value,player:player.value,uid:uid.value,phone:phone.value,tournament:tournament.value,discord:discord.value});localStorage.setItem("ff_regs",JSON.stringify(regs));e.target.reset();document.getElementById("notice").style.display="block";render();setTimeout(()=>notice.style.display="none",3000)});
+function openLogin(){document.getElementById("loginModal").classList.add("show");document.getElementById("ap").focus()}function closeLogin(){document.getElementById("loginModal").classList.remove("show")}
+function login(){if(au.value==="SAMI"&&ap.value==="THE-SAMI"){closeLogin();document.getElementById("admin").style.display="block";document.getElementById("admin").scrollIntoView({behavior:"smooth"})}else loginError.style.display="block"}
+function logout(){document.getElementById("admin").style.display="none";window.scrollTo({top:0,behavior:"smooth"})}
+function tab(id,el){document.querySelectorAll(".admin-section").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));el.classList.add("active")}
+function delReg(i){regs.splice(i,1);localStorage.setItem("ff_regs",JSON.stringify(regs));render()}function clearRegistrations(){if(confirm("Delete all registrations?")){regs=[];localStorage.setItem("ff_regs","[]");render()}}
+function addTournament(){if(!tn.value)return;let a=get("tournaments");a.push({name:tn.value,prize:tp.value||"TBA",date:td.value||"TBA",mode:tm.value||"Squad",open:true});set("tournaments",a);tn.value=tp.value=td.value=tm.value="";render()}
+function toggleTournament(i){let a=get("tournaments");a[i].open=!a[i].open;set("tournaments",a);render()}function delTournament(i){let a=get("tournaments");a.splice(i,1);set("tournaments",a);render()}
+function addMatch(){if(!mn.value)return;let a=get("matches");a.push({name:mn.value,date:md.value||"TBA",room:mr.value||"TBA",pass:mp.value||"TBA"});set("matches",a);mn.value=md.value=mr.value=mp.value="";render()}function delMatch(i){let a=get("matches");a.splice(i,1);set("matches",a);render()}
+function addLeader(){if(!ln.value)return;let a=get("leaders");a.push({name:ln.value,m:+lm.value||0,b:+lb.value||0,p:+lp.value||0});set("leaders",a);ln.value=lm.value=lb.value=lp.value="";render()}function delLeader(i){let a=get("leaders");a.splice(i,1);set("leaders",a);render()}
+render();
+</script>
+</body>
+</html>
